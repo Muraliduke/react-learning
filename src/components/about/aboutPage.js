@@ -3,6 +3,16 @@
 var React = require('react');
 
 var About = React.createClass({
+
+ 
+getInitialState: function(){
+        return {
+            name: '',
+    Id: ''
+        };
+            
+    
+    },
     statics: {
         willTransitionTo: function(transition, params, query, callback){
             console.log(transition);
@@ -34,9 +44,44 @@ var About = React.createClass({
         }
 
     },
+    submitForm(event){
+        event.preventDefault();
+        
+        var nameVal=document.getElementById('name').value;
+         var IDVal=document.getElementById('ID').value;
+       
+        var QuerySubmission={
+            name : nameVal,
+            id : IDVal
+        };
+         console.log(QuerySubmission);
+         if(nameVal != '' && IDVal != ''){
+            alert("Submitted successfully");
+         document.getElementById('name').value = '';
+         document.getElementById('ID').value = '';
+         }
+         
+    },
     render: function() {
         return (
-            <h2>This is About Page</h2>
+            <form className="demoForm col-md-6" onSubmit={this.submitForm.bind(this)}>
+       <h2>Sign up</h2>
+       <div className="form-group">
+         <label htmlFor="Name">DistributionName</label>
+         <input type="text" id='name'  className="form-control"
+          />
+       </div>
+        <div className="form-group">
+         <label htmlFor="Id">Distribution Id</label>
+         <input type="text" id='ID' className="form-control"
+         />
+       </div>
+      
+      
+       <button type="submit" className="btn btn-primary">
+          Sign up
+       </button>
+     </form>
         
 
         );
